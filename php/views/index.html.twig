@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/public/js/passcode.js"></script>
+    <script src="/public/js/keypad.js"></script>
+    <link rel="stylesheet" href="/public/css/style.css">
+
+    <script src="/public/js/softkeys.js"></script>
+    <link rel="stylesheet" href="/public/css/softkeys.css">
+</head>
+<body>
+<br/><h1>Enter code:</h1> <br/>
+    <form class="row form">
+        <div class="col-sm-offset-4 col-sm-4 form-group">
+            <input type="text" name="code" readonly class="form-control input-lg">
+        </div>
+
+        <div class="softkeys softkeys--xl" data-target="input[name='code']"></div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,17 @@
+runtime: php55
+api_version: 1
+threadsafe: true
+
+handlers:
+  - url: /public
+    static_dir: public
+
+  - url: /favicon.ico
+    static_files: public/favicon.ico
+    upload: public/favicon.ico
+
+  - url: /static
+    static_dir: public
+
+  - url: /.*
+    script: index.php

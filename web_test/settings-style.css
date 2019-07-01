@@ -1,0 +1,142 @@
+body {
+    background-image: url("bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+.main-content {
+    color: black;
+}
+
+.mid-heading {
+    color: #6e6e6e;
+}
+
+.site-content {
+    background-color: rgba(234, 232, 235, 0.6);
+    border-radius: 6px; /* Rounded corners */
+    padding: 8px 0;
+    width: 75%;
+    position: relative;
+    left: 12.5%;
+
+    font-family: Gill Sans, sans-serif;
+    font-weight: bold;
+}
+
+.collapsible-body {
+    position: relative;
+    left:0;
+    padding: 0 0 0 0;
+    top:0;
+    background-color:white;
+}
+
+.toast {
+    min-height: 70px;
+}
+
+#toast-container {
+    top: 10% !important;
+    right: auto !important;
+    font-family: Gill Sans, sans-serif;
+    bottom: auto !important;
+    left:25% !important;
+    width: 50% !important;
+    height: 600px !important;
+}
+
+.alarm-time-outer {
+    background-color: rgba(68, 59, 81, 0.6);
+    border-radius: 6px;
+    padding: 8px 0;
+    width: 75%;
+    left: 12.5%;
+    position: relative;
+}
+
+.divider{
+    width:10px;
+    height:auto;
+    display:inline-block;
+}
+
+.inner {
+    color: lightgray;
+    background-color: rgba(68, 59, 81, 0.6);
+    border-radius: 6px;
+    padding: 8px 50px;
+    width: 100%;
+    left: 0;
+    text-align: left;
+    position: relative;
+}
+
+.alarm {
+    width: 75%;
+    left: 12.5%;
+    position: relative;
+}
+
+.alarm-time-selection {
+    position: absolute;
+    top: 30%;
+    right: 20%;
+}
+
+.icon {
+    display: inline-block;
+    line-height: 0;
+    overflow: auto;
+    border-radius: 60px;
+    box-shadow: 0px 0px 2px #888;
+    padding: 0.5em 0.6em;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Popup container - can be anything you want */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popuptext {
+    visibility: hidden;
+    width: 50%;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    left: 25%;
+    top: 50%;
+}
+
+/* Toggle this class - hide and show the popup */
+.show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+

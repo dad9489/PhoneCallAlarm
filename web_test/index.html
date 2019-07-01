@@ -1,0 +1,23 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="passcode.js"></script>
+<script src="restrict.js"></script>
+<script src="softkeys-0.0.1.js"></script>
+<link rel="stylesheet" href="softkeys-0.0.1.css">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<br/><h1>Enter code:</h1> <br/>
+	<form class="row form">
+		<div class="col-sm-offset-4 col-sm-4 form-group">
+			<input type="text" name="code" readonly class="form-control input-lg">
+		</div>
+		
+		<div class="softkeys softkeys--xl" data-target="input[name='code']"></div>
+	</form>
+</body>
+</html>
+
+<!-- Changed: passcode.js checkCode(), softkeys.js 134-136 -->
