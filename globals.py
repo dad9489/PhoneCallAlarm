@@ -1,9 +1,6 @@
 DOMAIN = 'https://phone-call-alarm.appspot.com'
 
-import boto3
-import pygame
 import requests
-import time
 
 
 # File like object that streams the object from URL
