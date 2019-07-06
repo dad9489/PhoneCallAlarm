@@ -11,8 +11,8 @@ class Alarm:
     def __init__(self, ringing):
         self.hue = Bridge('192.168.1.39')
         self.hue.connect()
-        self.lights = self.hue.get_api()['lights']
-        self.light_names = self.lights.keys()
+        self.light_group = int(list(self.hue.get_api()['groups'].keys())[0])
+        # self.light_names = self.lights.keys()
         self.ringing = ringing
 
     def play(self):
@@ -41,21 +41,16 @@ class Alarm:
         reading = [0.4452, 0.4068]
         sleep_time = 0.5
 
-        for light_name in self.light_names:
-            self.hue.set_light(int(light_name), 'on', True)
+        self.hue.set_group(self.light_group, 'on', True)
+        self.hue.set_group(self.light_group, 'xy', red)
 
         while self.ringing:
-            for light_name in self.light_names:
-                self.hue.set_light(int(light_name), 'xy', red)
-                self.hue.set_light(int(light_name), 'bri', 255)
+            self.hue.set_group(self.light_group, 'bri', 255)
             sleep(sleep_time)
-            for light_name in self.light_names:
-                self.hue.set_light(int(light_name), 'xy', red)
-                self.hue.set_light(int(light_name), 'bri', 0)
+            self.hue.set_group(self.light_group, 'bri', 0)
             sleep(sleep_time)
-        for light_name in self.light_names:
-            self.hue.set_light(int(light_name), 'xy', reading)
-            self.hue.set_light(int(light_name), 'bri', 254)
+        self.hue.set_group(self.light_group, 'xy', reading)
+        self.hue.set_group(self.light_group, 'bri', 254)
 
     def ring(self):
         Thread(target=self.play).start()
