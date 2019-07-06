@@ -20,8 +20,9 @@ class Alarm:
         while True:
             pygame.mixer.init()
 
-            stream = Stream(DOMAIN+'/public/alarm.mp3')
-            pygame.mixer.music.load(stream)
+            # stream = Stream(DOMAIN+'/public/alarm.mp3')
+            # pygame.mixer.music.load(stream)
+            pygame.mixer.music.load('./php/public/alarm.mp3')
             pygame.mixer.music.play()
             while pygame.mixer.music.get_busy() and self.ringing:
                 continue
