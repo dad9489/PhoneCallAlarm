@@ -80,7 +80,6 @@ def time_checker():
                 if str(now.hour) == alarm_hour and str(now.minute) == alarm_minute and \
                         (today in convert_days(alarm['days_active'])) and alarm['active'] and not alarm_ringing:
                     Thread(target=ring_alarm).start()
-                    time.sleep(60)
         except TypeError:
             pass
 
@@ -98,6 +97,7 @@ def ring_alarm():
     alarm.ring()
     alarm_ringing = False
     Thread(target=beat_controller).start()
+    time.sleep(60)
     Thread(target=time_checker).start()
 
 
