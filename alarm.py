@@ -40,6 +40,9 @@ class Alarm:
         reading = [0.4452, 0.4068]
         sleep_time = 0.5
 
+        for light_name in self.light_names:
+            self.hue.set_light(int(light_name), 'on', True)
+
         while self.ringing:
             for light_name in self.light_names:
                 self.hue.set_light(int(light_name), 'xy', red)
