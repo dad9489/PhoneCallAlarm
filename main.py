@@ -38,6 +38,7 @@ def beat():
 
 
 def beat_controller():
+    beat()
     while True:
         time.sleep(BEAT_TIME)
         if not alarm_ringing:
