@@ -32,9 +32,12 @@ number_to_day = {0: "Monday", 1: "Tuesday", 2: "Wednesday", 3: "Thursday", 4: "F
 def beat():
     global wakeup_times
     data = {'device_name': 'Raspberry Pi', 'time': str(datetime.datetime.now()), 'alarm_bool': str(alarm_ringing)}
-    r = requests.post(DOMAIN+'/beat', json=data)
-    wakeup_times = r.json()
-    print('beat response: '+str(r.text))
+    try:
+        r = requests.post(DOMAIN+'/beat', json=data)
+        wakeup_times = r.json()
+        print('beat response: '+str(r.text))
+    except:
+        print('Network error when attempting to send heartbeat')
 
 
 def beat_controller():
