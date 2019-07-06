@@ -17,10 +17,10 @@ import time
 from random import randint
 from threading import Thread
 from phone import begin_dial
-from sound import Alarm
+from alarm import Alarm
 from globals import DOMAIN
 
-BEAT_TIME = 5      # the number of seconds to wait between beats TODO change to 60(?)
+BEAT_TIME = 60      # the number of seconds to wait between beats
 CALL_TIME = 120     # the number of seconds to wait between phone calls
 
 alarm_ringing = False
@@ -31,8 +31,7 @@ number_to_day = {0: "Monday", 1: "Tuesday", 2: "Wednesday", 3: "Thursday", 4: "F
 
 def beat():
     global wakeup_times
-    # TODO change name to Raspberry Pi
-    data = {'device_name': 'Python DEBUG', 'time': str(datetime.datetime.now()), 'alarm_bool': str(alarm_ringing)}
+    data = {'device_name': 'Raspberry Pi', 'time': str(datetime.datetime.now()), 'alarm_bool': str(alarm_ringing)}
     r = requests.post(DOMAIN+'/beat', json=data)
     wakeup_times = r.json()
     print('beat response: '+str(r.text))

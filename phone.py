@@ -5,7 +5,8 @@ from globals import DOMAIN
 
 TWILIO_PHONE_NUMBER = "+13103214853"
 
-# list of one or more phone numbers to dial, in "+19732644210" format
+# list of one o
+# r more phone numbers to dial, in "+19732644210" format
 DIAL_NUMBERS = ["+18645207019", ]
 
 # replace the placeholder values with your Account SID and Auth Token
