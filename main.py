@@ -42,7 +42,7 @@ def beat():
 
 def beat_controller():
     beat()
-    while True:
+    while not alarm_ringing:
         time.sleep(BEAT_TIME)
         if not alarm_ringing:
             beat()
@@ -71,7 +71,7 @@ def convert_days(days):
 
 
 def time_checker():
-    while True:
+    while not alarm_ringing:
         try:
             now = datetime.datetime.now()
             for alarm in wakeup_times:
@@ -97,6 +97,8 @@ def ring_alarm():
     alarm = Alarm(alarm_ringing)
     alarm.ring()
     alarm_ringing = False
+    Thread(target=beat_controller).start()
+    Thread(target=time_checker).start()
 
 
 if __name__ == "__main__":
