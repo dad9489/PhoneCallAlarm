@@ -5,14 +5,11 @@ from time import sleep
 from globals import DOMAIN
 from globals import Stream
 from phue import Bridge
+from phue import PhueRegistrationException
 
 
 class Alarm:
     def __init__(self, ringing):
-        self.hue = Bridge('192.168.1.39')
-        self.hue.connect()
-        self.light_group = int(list(self.hue.get_api()['groups'].keys())[0])
-        # self.light_names = self.lights.keys()
         self.ringing = ringing
 
     def play(self):
@@ -37,20 +34,42 @@ class Alarm:
             self.ringing = (r.text == 'True')
 
     def blink_lights(self):
-        red = [0.6786, 0.3159]
-        reading = [0.4452, 0.4068]
-        sleep_time = 0.5
+        try:
+            ip = requests.get('https://www.meethue.com/api/nupnp').json()[0]['internalipaddress']
+            hue = Bridge(ip)
+            hue.connect()
+            light_group = int(list(hue.get_api()['groups'].keys())[0])
+            red = [0.6786, 0.3159]
+            reading = [0.4452, 0.4068]
+            sleep_time = 0.5
 
-        self.hue.set_group(self.light_group, 'on', True)
-        self.hue.set_group(self.light_group, 'xy', red)
+            # save the original light settings, so they can be reset when the alarm is turned off
+            lights = hue.get_api()['lights']
+            orig_settings = {}
+            for light_id in lights.keys():
+                light = lights[light_id]
+                xy = light['state']['xy']
+                bri = light['state']['bri']
+                on = light['state']['on']
+                orig_settings[light_id] = xy, bri, on
+            print(orig_settings)
 
-        while self.ringing:
-            self.hue.set_group(self.light_group, 'bri', 255)
-            sleep(sleep_time)
-            self.hue.set_group(self.light_group, 'bri', 0)
-            sleep(sleep_time)
-        self.hue.set_group(self.light_group, 'xy', reading)
-        self.hue.set_group(self.light_group, 'bri', 254)
+            hue.set_group(light_group, 'on', True)
+            hue.set_group(light_group, 'xy', red)
+
+            while self.ringing:
+                hue.set_group(light_group, 'bri', 255)
+                sleep(sleep_time)
+                hue.set_group(light_group, 'bri', 0)
+                sleep(sleep_time)
+
+            # return the lights to their original settings
+            for light_id in orig_settings.keys():
+                orig_setting = orig_settings[light_id]
+                command = {'xy': orig_setting[0], 'bri': orig_setting[1], 'on': orig_setting[2]}
+                hue.set_light(int(light_id), command)
+        except PhueRegistrationException:
+            print('ERROR: The link button needs to be pressed to control the lights')
 
     def ring(self):
         Thread(target=self.play).start()
