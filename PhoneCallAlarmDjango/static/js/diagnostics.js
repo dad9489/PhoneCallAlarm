@@ -1,10 +1,4 @@
-var code = null;
-var input = '';
-let DOMAIN = window.location.hostname;
-
 (function() {
-    var test = 'test';
-
     function startup() {
         // To avoid No 'Access-Control-Allow-Origin' header error:
         $.ajaxPrefilter( function (options) {
@@ -16,8 +10,12 @@ let DOMAIN = window.location.hostname;
         $.get(
             '/settings/code',
             function (response) {
-                code = response;
-                console.log(code);
+                $('#diagnostics-code').text('Most recent code: ' + response);
+            });
+        $.get(
+            '/settings/alarm_ringing',
+            function (response) {
+                $('#diagnostics-alarm-ringing').text('Alarm ringing: ' + response);
             });
     }
 
@@ -26,19 +24,3 @@ let DOMAIN = window.location.hostname;
     // once loading is complete.
     window.addEventListener('load', startup, false);
 })();
-
-function checkCode() {
-    if(input === code) {
-        console.log('correct');
-        $('body,html').addClass('green');
-
-        $.post(DOMAIN+"/beat",
-            {
-                device_name: "Webpage Keypad",
-                time: new Date().toLocaleString(),
-                alarm_bool: "False"
-            });
-    } else {
-        $('body,html').removeClass('green');
-    }
-}

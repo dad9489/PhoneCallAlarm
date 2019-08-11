@@ -3,7 +3,7 @@ from twilio.twiml.voice_response import VoiceResponse
 import requests
 from globals import DOMAIN
 
-TWILIO_PHONE_NUMBER = "+13103214853"
+TWILIO_PHONE_NUMBER = "+12566672443"
 
 # list of one o
 # r more phone numbers to dial, in "+19732644210" format
@@ -11,7 +11,7 @@ DIAL_NUMBERS = ["+18645207019", ]
 
 # replace the placeholder values with your Account SID and Auth Token
 # found on the Twilio Console: https://www.twilio.com/console
-client = Client("ACf43effe9a0a3ed1719c809e7f6f736f9", "d3bcfa3769088d3435c984926d8411d2")
+client = Client("AC95ef17f2e05b1c68a01fd67b6f0e93c3", "caf2ffcef76f011f24183245ddf0a4bc")
 
 
 def begin_dial(code):

@@ -25,7 +25,7 @@ SECRET_KEY = '#jd5ovl3b&yaxy9vg%t^edbu@*&3q4-o9$@@e-y=bxpurqz@7q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +38,26 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'settings',
+    'django_celery_results',
+    'django_celery_beat',
 ]
+
+from celery.schedules import crontab
+CELERY_BROKER_URL = 'amqp://localhost'
+# CELERY_TIMEZONE = 'Europe/Warsaw'
+# # Let's make things happen
+# CELERY_BEAT_SCHEDULE = {
+#  'send-summary-every-hour': {
+#      'task': 'my_app.tasks.send_notification',
+#      # There are 4 ways we can handle time, read further
+#      'schedule': 1.0,
+#     },
+#     # # Executes every Friday at 4pm
+#     # 'send-notification-on-friday-afternoon': {
+#     #      'task': 'my_app.tasks.send_notification',
+#     #      'schedule': crontab(hour=16, day_of_week=5),
+#     #     },
+# }
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

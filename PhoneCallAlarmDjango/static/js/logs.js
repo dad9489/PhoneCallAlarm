@@ -1,5 +1,5 @@
 
-let DOMAIN = 'https://phone-call-alarm.appspot.com';
+let DOMAIN = window.location.hostname;
 
 
 $(document).ready(function(){

@@ -1,5 +1,4 @@
 
-alarm_times = [];
 
 days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 days_to_ids = {"Monday": 'Mon', "Tuesday": 'Tue', "Wednesday": 'Wed', "Thursday": 'Thu', "Friday": 'Fri',
@@ -55,20 +54,12 @@ function get_alarm_html(alarm) {
         }
       });
 
-      $.get(
-          DOMAIN+'/alarm_times',
-          function (response) {
-            alarm_times = JSON.parse(response);
-
-            //display alarms from array
-            $('#inner-alarm-time').empty();
-            for(i in alarm_times) {
-              alarm = alarm_times[i];
-              alarm_html = get_alarm_html(alarm);
-              $('#inner-alarm-time').append(alarm_html);
-              update_page_by_alarm(alarm);
-            }
-          });
+      for(i in alarm_times) {
+        alarm = alarm_times[i];
+        alarm_html = get_alarm_html(alarm);
+        $('#inner-alarm-time').append(alarm_html);
+        update_page_by_alarm(alarm);
+      }
     }
     startup();
 
@@ -143,8 +134,9 @@ function add_clicked() {
  */
 function save_clicked() {
   $('#save').removeClass('pulse');
-  $.post(DOMAIN+"/alarm_times",
+  $.post("",
       {
+        csrfmiddlewaretoken: csrf_token,
         alarm_times: JSON.stringify(alarm_times)
       }).done(function(msg){
         var toastHTML = '<span id="toast-container">' +

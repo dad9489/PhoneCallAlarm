@@ -11,12 +11,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body style="background-image: url({% static "bg.png" %});">
+
+<script>
+    alarm_times = [];
+    {% for alarm in alarms %}
+        alarm_times.push({'id': '{{alarm.id}}', 'active': ('{{alarm.active}}' == 'True'),
+            'days_active': JSON.parse('{{alarm.days_active|safe}}'),
+            'hour': {{alarm.hour}}, 'minute': {{alarm.minute}} });
+    {% endfor %}
+    csrf_token = '{% csrf_token %}';  // text form of html input element with value property of csrf_token
+    csrf_token = csrf_token.split('"')[csrf_token.split('"').indexOf(" value=")+1];  // get the value from the html
+</script>
+
+
+
 <br/>
 <div class="site-content">
     <br/><h1 class="main-content">Settings</h1>
-
-    <br/><h2 class="mid-heading">Last Beat</h2>
-    <h3 id="last-beat"></h3>
 
     <br/><h2 class="mid-heading">Alarm Times</h2>
 
@@ -25,9 +36,9 @@
 
         <div id="inner-alarm-time">
             <br/>
-            <div class="progress" style="width: 25%;left: 37.5%;">
-                <div class="indeterminate"></div>
-            </div>
+<!--            <div class="progress" style="width: 25%;left: 37.5%;">-->
+<!--                <div class="indeterminate"></div>-->
+<!--            </div>-->
         </div>
 
         <!-- Add/Save buttons -->
@@ -100,34 +111,17 @@
         </div>
     </div>
 
-    <br/><br/><h2 class="mid-heading">Full Heartbeat Logs</h2>
-    <div class="row">
-        <div class="col s10 offset-s1">
-            <ul class="collapsible">
-                <li>
-                    <div class="collapsible-header">Logs</div>
-                    <div class="collapsible-body" id="beat-collection">
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-
+    <br/><h2 class="mid-heading">Diagnostics</h2>
+    <h3 id="diagnostics-code">Most recent code: </h3>
+    <h3 id="diagnostics-alarm-ringing">Alarm ringing: </h3>
 
 </div>
-
-<script>
-    // When the user clicks on div, open the popup
-    function myFunction() {
-        var popup = document.getElementById("myPopup");
-        popup.classList.toggle("show");
-    }
-</script>
 
 <!--JavaScript at end of body for optimized loading-->
 <script type="text/javascript" src='{% static "js/materialize.js" %}'></script>
 <script type="text/javascript" src='{% static "js/timeago.js" %}'></script>
 <script type="text/javascript" src='{% static "js/alarms.js" %}'></script>
-<script type="text/javascript" src='{% static "js/logs.js" %}'></script>
+<script type="text/javascript" src='{% static "js/diagnostics.js" %}'></script>
+
 </body>
 </html>

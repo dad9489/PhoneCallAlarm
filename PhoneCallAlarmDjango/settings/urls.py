@@ -16,7 +16,12 @@ Including another URLconf
 from django.urls import path
 
 from . import views
+from . import internal_routes
+
+app_name = 'alarms'
 
 urlpatterns = [
     path('', views.settings),
+    path('code/', internal_routes.code),
+path('alarm_ringing/', internal_routes.alarm_ringing)
 ]

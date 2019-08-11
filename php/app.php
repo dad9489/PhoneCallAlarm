@@ -36,7 +36,7 @@ $app = new Application();
  * /alarm_bool  returns True or False signifying whether the alarm is currently going off, read from alarm_bool.txt
  * /beat_logs   returns string representation of list of beat logs
  * /alarm_times returns the contents of alarm_times.txt
- * /settings TODO serves HTML with diagnostic information including contents of beat_log.txt
+ * /settings    serves HTML with diagnostic information including contents of beat_log.txt
  *
  * --------- POST ---------
  * /message     takes resp_message field of JSON content from request and saves to message.txt
